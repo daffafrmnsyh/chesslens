@@ -1,2 +1,18 @@
 eco	name	pgn
 B20	Sicilian Defense: Bowdler Attack	1. e4 c5 2. Nf3 Nc6 3. Bc4
+D02	London System	1. d4 d5 2. Nf3 Nf6 3. Bf4
+D02	London System: with e3	1. d4 d5 2. Nf3 Nf6 3. Bf4 e6 4. e3
+D02	London System: with c3	1. d4 d5 2. Nf3 Nf6 3. Bf4 e6 4. e3 c5 5. c3
+D02	London System: with Nbd2	1. d4 d5 2. Nf3 Nf6 3. Bf4 e6 4. e3 c5 5. c3 Nc6 6. Nbd2
+D02	London System: with Bd3	1. d4 d5 2. Nf3 Nf6 3. Bf4 e6 4. e3 c5 5. c3 Nc6 6. Nbd2 Bd6 7. Bd3
+D02	London System: with h3	1. d4 d5 2. Nf3 Nf6 3. Bf4 e6 4. e3 c5 5. c3 Nc6 6. Nbd2 Bd6 7. Bd3 O-O 8. h3
+A48	London System: with c3	1. d4 Nf6 2. Nf3 g6 3. Bf4 Bg7 4. e3 d6 5. Bd3 O-O 6. O-O c5 7. c3
+A48	London System: with Nbd2	1. d4 Nf6 2. Nf3 g6 3. Bf4 Bg7 4. e3 d6 5. Bd3 O-O 6. O-O c5 7. c3 b6 8. Nbd2
+A48	London System: with h3	1. d4 Nf6 2. Nf3 g6 3. Bf4 Bg7 4. e3 d6 5. Bd3 O-O 6. O-O c5 7. c3 b6 8. Nbd2 Bb7 9. h3
+E60	King's Indian Defense	1. d4 Nf6 2. c4 g6
+A80	Dutch Defense	1. d4 f5 2. g3 Nf6
+A09	Réti Opening	1. Nf3 d5 2. c4 e6
+B21	Sicilian Defense: McDonnell Attack	1. e4 c5 2. d3 Nc6 3. f4
+B21	Sicilian Defense: McDonnell Attack	1. e4 c5 2. f4 Nc6 3. d3
+D20	Queen's Gambit: Accepted	1. d4 d5 2. c4 dxc4
+D30	Queen's Gambit: Declined	1. d4 d5 2. c4 e6

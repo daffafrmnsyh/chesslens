@@ -1,5 +1,6 @@
 import type {Classification} from '@/lib/chess';
 import type {MoveReview} from '@/lib/review';
+import {bookTheoryDescription} from '@/lib/opening-display';
 import {ClassificationIcon} from './classification';
 
 const descriptions:Record<Classification,string>={
@@ -24,13 +25,14 @@ export function EngineReviewFeedback({review}:{review?:MoveReview}){
   if(!review||!classification)return null;
   const isCorrection=correctionLabels.has(classification);
   const betterMove=review.correctionBestMove;
+  const description=classification==='Book'?bookTheoryDescription(review.opening):descriptions[classification];
 
   return <section className="engine-feedback" aria-live="polite" aria-label="Game Review feedback">
     <div className="engine-feedback-heading">
       <ClassificationIcon label={classification}/>
       <div>
         <h3>{review.played} is {labels[classification]}</h3>
-        <p>{descriptions[classification]}</p>
+        <p>{description}</p>
       </div>
     </div>
     {isCorrection&&betterMove!=='—'&&<p className="engine-feedback-better"><strong>{betterMove}</strong> was better.</p>}
