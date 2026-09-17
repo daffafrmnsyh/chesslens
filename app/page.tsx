@@ -33,7 +33,7 @@ const essentials = [
 ];
 
 function Brand() {
-  return <Link className="landing-brand" href="/" aria-label="Chesslens home"><span aria-hidden="true">♞</span><strong>Chesslens<i>.</i></strong></Link>;
+  return <Link className="landing-brand" href="/" aria-label="ChessCheese home"><span aria-hidden="true">♞</span><strong>ChessCheese<i>.</i></strong></Link>;
 }
 
 function ProductPreview() {
@@ -48,7 +48,7 @@ function ProductPreview() {
     </div>;
   });
 
-  return <div className="landing-product-stage" aria-label="Chesslens game review preview">
+  return <div className="landing-product-stage" aria-label="ChessCheese game review preview">
     <div className="landing-product-preview">
       <div className="landing-preview-top"><Brand /><span>◉ Game review</span><span>Stockfish</span></div>
       <div className="landing-preview-board-wrap">
@@ -101,8 +101,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="landing-essentials" id="why-chesslens" aria-labelledby="landing-essentials-title">
-        <div className="landing-section-heading"><p className="landing-eyebrow">WHY CHESSLENS</p><h2 id="landing-essentials-title">Everything you need<br />to review your games.</h2></div>
+      <section className="landing-essentials" id="why-chesscheese" aria-labelledby="landing-essentials-title">
+        <div className="landing-section-heading"><p className="landing-eyebrow">WHY CHESSCHEESE</p><h2 id="landing-essentials-title">Everything you need<br />to review your games.</h2></div>
         <p className="landing-hand-note landing-insights-note">More insights.<br />Stronger games.<span /></p>
         <div className="landing-essential-grid">
           {essentials.map(({ icon: Icon, title, text }) => <article key={title}><span><Icon /></span><h3>{title}</h3><p>{text}</p></article>)}
@@ -111,8 +111,8 @@ export default function LandingPage() {
 
       <section className="landing-support" id="support" aria-labelledby="landing-support-title">
         <div className="landing-support-copy">
-          <p className="landing-eyebrow">SUPPORT CHESSLENS</p>
-          <h2 id="landing-support-title">Enjoying Chesslens?</h2>
+          <p className="landing-eyebrow">SUPPORT CHESSCHEESE</p>
+          <h2 id="landing-support-title">Enjoying ChessCheese?</h2>
           <p>If this project helps you review your games, consider supporting its development through Saweria.</p>
           <div className="landing-support-actions">
             <a className="landing-support-primary" href="https://saweria.co/daffafrmnsyh" target="_blank" rel="noreferrer"><Heart size={17} /> Support via Saweria <ArrowRight size={16} /></a>

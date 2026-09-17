@@ -14,7 +14,7 @@ This project redistributes the chess piece artwork under the terms of the BSD 3-
 
 ## Stockfish
 
-Chesslens uses Stockfish for chess analysis in the browser.
+ChessCheese uses Stockfish for chess analysis in the browser.
 
 Project:
 https://stockfishchess.org/

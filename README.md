@@ -1,4 +1,4 @@
-# Chesslab
+# ChessCheese
 
 A local-only Next.js + TypeScript chess analysis workspace. PGNs and evaluations stay in browser memory; there are no accounts, database, upload endpoints, or remote engine calls.
 

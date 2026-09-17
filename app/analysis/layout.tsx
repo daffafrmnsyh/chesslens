@@ -1,7 +1,7 @@
 import type {Metadata} from 'next';
 
 export const metadata:Metadata={
- title:'Game analysis · Chesslab',
+ title:'Game analysis · ChessCheese',
  description:'Import a PGN and review every move locally with Stockfish.',
 };
 
