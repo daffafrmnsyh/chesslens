@@ -59,7 +59,7 @@
 .landing-main{width:min(1200px,calc(100% - 48px));max-width:none;margin:0 auto;padding:0}
 .landing-hero{position:relative;display:grid;grid-template-columns:46% 54%;align-items:center;min-height:590px;margin-bottom:105px;padding:64px 44px;border-radius:38px;background:radial-gradient(circle at 34% 44%,#eaffb9 0,#d7ff91 48%,#c5ff70 100%)}
 .landing-hero-copy{position:relative;z-index:3;align-self:start;padding-top:12px}.landing-eyebrow{margin:0 0 20px;color:#296a30;font-size:11px;font-weight:850;letter-spacing:2.4px}
-.landing-hero h1{margin:0;color:#101713;font-size:clamp(48px,5.1vw,72px);line-height:.98;letter-spacing:-3.5px;font-weight:800}.landing-lede{max-width:445px;margin:27px 0 31px;color:#344239;font-size:18px;line-height:1.45}
+.landing-hero h1{margin:0;color:#101713;font-size:clamp(48px,4.65vw,60px);line-height:.98;letter-spacing:-3.5px;font-weight:800}.landing-lede{max-width:445px;margin:27px 0 31px;color:#344239;font-size:18px;line-height:1.45}
 .landing-primary-cta{width:max-content;padding:17px 24px}.landing-local-note{display:flex;align-items:center;gap:10px;margin:20px 0 0;color:#445249;font-size:11px}.landing-local-note>span{width:7px;height:7px;border-radius:50%;background:#79bb35;box-shadow:0 0 0 4px #79bb3520}
 .landing-hero-arrow{position:absolute;z-index:1;right:-18px;bottom:10px;width:77px;height:120px;fill:none;stroke:#101713;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;transform:rotate(16deg)}
 .landing-product-stage{position:relative;z-index:2;width:620px;max-width:none;transform:translate(-4px,22px) rotate(4.5deg)}
