@@ -14,9 +14,9 @@ import {
 import CopySupportLink from '@/components/copy-support-link';
 
 const previewPieces: Record<string, string> = {
-  a8: 'br', d8: 'bq', e8: 'bk', h8: 'br', a7: 'bp', b7: 'bp', d7: 'bp', f7: 'bp', g7: 'bp', h7: 'bp',
-  c6: 'bn', f6: 'bn', c5: 'bb', e5: 'bp', c4: 'wb', c3: 'wn', d3: 'wp', e4: 'wp', a2: 'wp', b2: 'wp', c2: 'wp',
-  f2: 'wp', g2: 'wp', h2: 'wp', a1: 'wr', d1: 'wq', e1: 'wk', f1: 'wb', h1: 'wr',
+  a8: 'bR', d8: 'bQ', e8: 'bK', h8: 'bR', a7: 'bP', b7: 'bP', d7: 'bP', f7: 'bP', g7: 'bP', h7: 'bP',
+  c6: 'bN', f6: 'bN', c5: 'bB', e5: 'bP', c4: 'wB', c3: 'wN', d3: 'wP', e4: 'wP', a2: 'wP', b2: 'wP', c2: 'wP',
+  f2: 'wP', g2: 'wP', h2: 'wP', a1: 'wR', d1: 'wQ', e1: 'wK', f1: 'wB', h1: 'wR',
 };
 
 const previewMoves = [
@@ -43,7 +43,7 @@ function ProductPreview() {
     const square = `${file}${rank}`;
     const piece = previewPieces[square];
     return <div className={`landing-preview-square ${(index + Math.floor(index / 8)) % 2 ? 'dark' : 'light'}${square === 'c3' ? ' selected' : ''}`} key={square}>
-      {piece && <img src={`/pieces/${piece}.png`} alt="" draggable={false} />}
+      {piece && <img src={`/pieces/${piece}.svg`} alt="" draggable={false} />}
       {square === 'c3' && <span className="landing-preview-grade" aria-label="Best move">★</span>}
     </div>;
   });
@@ -97,7 +97,7 @@ export default function LandingPage() {
         <div className="landing-value-grid">
           <article><span><Search /></span><h3>Understand every move</h3><p>See which moves were strong, inaccurate, or costly and understand where the game changed.</p></article>
           <article><span><GitBranch /></span><h3>Explore better lines</h3><p>Try alternative moves directly on the board and analyze the resulting positions with Stockfish.</p></article>
-          <article className="landing-stockfish-card"><span><BarChart3 /></span><h3>Powered by Stockfish</h3><p>Review your games with local engine analysis directly in your browser.</p><img className="landing-stockfish-piece" src="/pieces/bq.png" alt="Black chess queen" /></article>
+          <article className="landing-stockfish-card"><span><BarChart3 /></span><h3>Powered by Stockfish</h3><p>Review your games with local engine analysis directly in your browser.</p><img className="landing-stockfish-piece" src="/pieces/bQ.svg" alt="Black chess queen" /></article>
         </div>
       </section>
 
