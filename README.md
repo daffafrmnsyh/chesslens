@@ -1,43 +1,360 @@
 # ChessCheese
 
-A local-only Next.js + TypeScript chess analysis workspace. PGNs and evaluations stay in browser memory; there are no accounts, database, upload endpoints, or remote engine calls.
+ChessCheese is a browser-based chess game review tool built with Next.js, TypeScript, chess.js, and Stockfish.
 
-## Run locally
+Import a PGN, analyze the game locally in your browser, review move quality, inspect engine recommendations, explore alternative lines, and revisit key turning points without uploading your games to a remote analysis server.
 
-Requires Node.js 20.9 or newer and pnpm. From this directory:
+## Live Demo
+
+https://chesslens-ten.vercel.app
+
+## Features
+
+- Import PGN by paste or file upload
+- Review a game move by move
+- Stockfish-powered position evaluation
+- Move classifications:
+  - Book
+  - Best
+  - Excellent
+  - Good
+  - Inaccuracy
+  - Mistake
+  - Blunder
+- Best-move arrows
+- Evaluation timeline
+- Move Explorer
+- Temporary variation exploration
+- Opening detection with local opening data
+- Checkmate and draw terminal-state handling
+- Board flip
+- Promotion support
+- Responsive desktop and mobile layout
+- Local-only game analysis
+- No account or database required
+
+## How It Works
+
+ChessCheese runs game analysis directly in the browser.
+
+PGNs and engine evaluations are kept in browser memory. There are no user accounts, cloud databases, PGN upload endpoints, or remote engine-analysis calls.
+
+The basic flow is:
+
+1. Import a PGN
+2. Choose the desired analysis depth
+3. Run Stockfish analysis
+4. Review each move
+5. Inspect move classification and engine evaluation
+6. Explore alternative lines directly on the board
+7. Return to the original game at any time
+
+The landing page is available at `/`, while the analysis workspace lives at `/analysis`.
+
+## Tech Stack
+
+- Next.js
+- React
+- TypeScript
+- chess.js
+- Stockfish.js / Stockfish 18
+- Web Workers
+- SVG chess pieces
+- CSS
+
+## Run Locally
+
+Requires Node.js 20.9 or newer and pnpm.
+
+Install dependencies:
 
 ```sh
 pnpm install
+```
+
+Start the development server:
+
+```sh
 pnpm dev
 ```
 
-Open http://127.0.0.1:3000. For a production preview, run `pnpm build` followed by `pnpm start`. Run the focused parser and grading tests with `pnpm test`.
+Open:
 
-## Use
+```text
+http://127.0.0.1:3000
+```
 
-The app opens with Morphy's Opera Game. Import PGN by pasting text or selecting a file (up to 2 MB). A PGN containing multiple header-separated games exposes a game selector. Custom starting FENs are supported. Click Analyze game to evaluate all mainline positions. Click a move, use the navigation buttons or left/right arrow keys, or click the evaluation chart to review a position. Click a piece and a legal destination to explore a temporary variation; promotion offers all four pieces. Return to game restores the imported mainline. Variations are not included in the batch analysis.
+For a production preview:
 
-## Analysis model
+```sh
+pnpm build
+pnpm start
+```
 
-Stockfish 18 lite single-threaded runs as a dedicated Web Worker. Installation copies its JavaScript, WASM and license into `public/engine`; no CDN or cross-origin isolation is needed. Each position searches to the selected depth, capped at 2 seconds. The displayed depth is the actual completed depth. The engine is terminated on cancellation or game changes, and stale results are discarded.
+Run the test suite with:
 
-Evaluations are normalized to White's perspective. Move loss is `max(0, (before − after) × moverSign)` with White = +1 and Black = −1. Classification thresholds are Best ≤10 cp (or the engine's best move), Excellent ≤25, Good ≤50, Inaccuracy ≤100, Mistake ≤200, otherwise Blunder. Unanalyzed moves remain ungraded. Mate is displayed separately and mapped to a large signed score for loss calculations, making labels near mate approximate. Independent shallow searches can disagree; these labels are heuristics, not a commercial accuracy metric. Position evaluation uses FEN and does not preserve threefold repetition history.
+```sh
+pnpm test
+```
 
-The responsive board supports click/tap moves, castling, en passant and promotion through chess.js legality checks. Refreshing clears imported games and results. PGN comments and sidelines are parsed but only the mainline is reviewed. A feature-detected, read-only WebMCP tool exposes the currently visible position in supported browsers.
+## Using ChessCheese
 
-## Third-party software
+ChessCheese opens with a sample game so the review interface can be explored immediately.
 
-- chess.js: BSD-2-Clause, https://github.com/jhlywa/chess.js
-- Stockfish.js 18.0.8: GPL-3.0, https://github.com/nmrugg/stockfish.js/tree/v18.0.8
-- Stockfish source and build instructions: https://github.com/nmrugg/stockfish.js
-- Engine license included at `public/engine/COPYING.txt`.
+You can import another game by:
 
-Keep the engine license and provide corresponding source in compliance with GPL-3.0 if redistributing. This local MVP is not published.
+- pasting PGN text
+- selecting a `.pgn` file
 
-## Selected move review
+PGN files up to 2 MB are supported.
 
-`Evaluation.best` remains the single source for Stockfish's UCI move. The board arrow and review panel both use the engine alternative from **before** the selected move (`results[ply - 1]`). The board still shows the position after the move, so the recommended source square can now be empty. A circular classification badge marks the played move’s destination; last-move highlights remain visible. Both overlays hide at the initial position and in temporary variations. The arrow hides when the prior evaluation has no valid best move; the badge hides when classification is unavailable. Flipping the board rotates both overlays, with badge placement kept near the destination’s visual top-right corner and clamped at board edges.
+A PGN containing multiple header-separated games exposes a game selector.
 
-`lib/review.ts` derives reviews once from the existing results, calling the unchanged `moveGrade` classification logic in `lib/chess.ts`. The explorer, selected review and summary consume that derived data without maintaining another analysis store. Partial analysis does not produce fabricated losses or labels.
+Custom starting FENs are also supported.
 
-Opening detection does not exist yet. `OpeningBookLookup` is the extension point for a future locally bundled, licensed opening dataset mapping normalized positions to book UCI moves. A detector would normalize FEN keys (including side-to-move/castling/en-passant policy), check legal moves against the dataset, and be passed to `deriveReviews`. The Book icon and type are ready; no external API, dataset, or automatic early-move labeling has been added.
+After importing a game:
+
+1. choose an analysis depth
+2. click **Analyze game**
+3. select any move to review the resulting position
+
+You can navigate through the game using:
+
+- the move list
+- Previous / Next controls
+- keyboard arrow keys
+- the Evaluation Timeline
+Using ChessCheese
+
+ChessCheese opens with a sample game so the review interface can be explored immediately.
+
+You can import another game by:
+
+pasting PGN text
+selecting a .pgn file
+
+PGN files up to 2 MB are supported.
+
+A PGN containing multiple header-separated games exposes a game selector.
+
+Custom starting FENs are also supported.
+
+After importing a game:
+
+choose an analysis depth
+click Analyze game
+select any move to review the resulting position
+
+You can navigate through the game using:
+
+the move list
+Previous / Next controls
+keyboard arrow keys
+the Evaluation Timeline
+Game Review
+
+Each analyzed move receives a derived review based on the engine evaluation before and after the move.
+
+Current classifications include:
+
+Book
+Best
+Excellent
+Good
+Inaccuracy
+Mistake
+Blunder
+
+The review panel can show:
+
+the move played
+move classification
+evaluation change
+engine recommendation when available
+opening information when recognized
+
+The board can also display a correction arrow based on Stockfish's recommended move from the position before the selected move.
+
+Analysis Model
+
+Stockfish 18 lite runs in the browser using a dedicated Web Worker.
+
+The engine JavaScript, WASM, and related files are bundled with the application, so analysis does not require a remote engine service.
+
+Each position is analyzed using the selected search depth with runtime safeguards to prevent excessively long searches.
+
+The displayed evaluation is normalized to White's perspective:
+
+positive evaluation = advantage for White
+negative evaluation = advantage for Black
+
+Move loss is derived from the difference between the evaluation before and after the played move from the perspective of the player who moved.
+
+Current classification thresholds are heuristic:
+
+Best        <= 10 cp or engine best move
+Excellent   <= 25 cp
+Good        <= 50 cp
+Inaccuracy  <= 100 cp
+Mistake     <= 200 cp
+Blunder     > 200 cp
+
+Mate positions are handled separately.
+
+Because independent engine searches may complete at different depths, classifications near tactical or mating positions should be treated as practical review guidance rather than an authoritative commercial accuracy metric.
+
+Evaluation Timeline
+
+The Evaluation Timeline shows how the engine evaluation changes throughout the game.
+
+It provides a quick way to identify:
+
+turning points
+major mistakes
+tactical swings
+positions worth reviewing
+
+Selecting a point on the timeline moves the board to the corresponding position.
+
+Variation Mode
+
+You can explore alternative moves directly from the currently displayed board position.
+
+When a legal move is played outside the imported mainline, ChessCheese enters a temporary variation.
+
+Variation mode:
+
+starts from the currently selected position
+allows moves for both sides
+evaluates the resulting position with Stockfish
+shows engine recommendations
+keeps the original imported game unchanged
+
+Use Return to Game to leave the variation and return to the imported mainline.
+
+Temporary variations are not included in the original batch analysis.
+
+Opening Detection
+
+ChessCheese includes local opening recognition based on normalized board positions.
+
+When a known position is recognized, the review interface may show:
+
+opening family
+variation name
+ECO code
+Book classification for recognized theoretical moves
+
+Opening recognition is based on the current board position rather than permanently assuming the game remains in book after a deviation.
+
+The opening dataset is local and intentionally limited, so not every opening or transposition will be recognized.
+
+Terminal Positions
+
+ChessCheese detects and handles terminal game states including:
+
+checkmate
+stalemate
+insufficient material
+repetition where supported by the available game history
+fifty-move-rule conditions where supported
+
+Terminal positions use explicit win/draw presentation instead of normal centipawn evaluation.
+
+Board Interaction
+
+The chessboard uses chess.js legality checks and supports:
+
+normal legal moves
+castling
+en passant
+promotion
+board flipping
+click/tap interaction
+
+Promotion provides all four standard options:
+
+Queen
+Rook
+Bishop
+Knight
+Privacy
+
+ChessCheese is designed as a local-first analysis tool.
+
+Game data and engine evaluations remain in browser memory during the session.
+
+ChessCheese does not currently use:
+
+user accounts
+a database
+cloud PGN storage
+remote Stockfish analysis
+
+Refreshing the page clears imported games and analysis results.
+
+Limitations
+
+ChessCheese is an independent side project and is not intended to reproduce commercial chess-platform accuracy systems.
+
+Current limitations include:
+
+opening coverage is intentionally incomplete
+classifications use heuristic centipawn-loss thresholds
+analysis results may vary slightly depending on completed engine depth
+repetition-related evaluation depends on available move history
+imported PGN comments and sidelines are parsed, but only the mainline is reviewed
+temporary variations are not included in batch analysis
+no cloud persistence
+no account synchronization
+no multiplayer functionality
+Third-Party Software
+
+ChessCheese uses open-source software and artwork.
+
+chess.js
+
+License: BSD-2-Clause
+
+https://github.com/jhlywa/chess.js
+
+Stockfish.js
+
+Stockfish 18 is used for browser-based chess analysis.
+
+License: GNU GPL v3
+
+https://github.com/nmrugg/stockfish.js
+
+Additional licensing information is available in:
+
+LICENSES/Stockfish-GPL-3.0.txt
+Chess Piece Artwork
+
+Chess piece artwork by Cburnett.
+
+Source: Wikimedia Commons
+
+License: BSD 3-Clause
+
+Additional attribution and licensing information is available in:
+
+THIRD_PARTY_NOTICES.md
+LICENSES/Cburnett-BSD-3-Clause.txt
+Independence
+
+ChessCheese is an independent project.
+
+It is not affiliated with, endorsed by, or sponsored by Chess.com, Lichess, Stockfish, or any other chess platform or organization.
+
+Support
+
+If you enjoy ChessCheese and want to support the project:
+
+https://saweria.co/daffafrmnsyh
+
+Author
+
+Built by Daffa Firmansyah.
+
+ChessCheese is an experimental product-design and engineering project focused on making chess game review easier to understand and explore.
