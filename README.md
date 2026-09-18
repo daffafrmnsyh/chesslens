@@ -6,7 +6,7 @@ Import a PGN, analyze the game locally in your browser, review move quality, ins
 
 ## Live Demo
 
-https://chesslens-ten.vercel.app
+http://chesscheese-ten.vercel.app/
 
 ## Features
 
